@@ -59,7 +59,8 @@ export class AppComponent {
 
 ## Types with TypeScript
 - TypeScript: compiler which adds strong typing to JS (you get ES6 too). `.ts -> .js`
-- You can start with an existing codebase and gradually add types. It looks like:
+- Can start with an existing codebase and gradually add types.
+- Example:
 
 ```
 let myNumber: number = 42;
@@ -67,7 +68,7 @@ let author: string = 'Douglas Adams';
 author = 5; // Compile time error: Type 'number' is not assignable to type 'string'
 ```
 
-- Can also create object interfaces like:
+- Create object interfaces like:
 
 ```
 interface Bird {
@@ -87,9 +88,10 @@ function addAmountToEachItem(amount: number, items: number[]): number[] {
 
 ## Observables
 - Promises solve callback hell. Observables solve it for streams of data
-- Provides a rich set of FP helpers like Underscore, but for streams
+- RxJS implements observables in Angular
+- Rich set of FP helpers. Like Underscore, but for streams
 - Angular's router and HTTP services use them
-- Many operators available: map, filter, merge, scan, etc
+- Many operators: map, filter, merge, scan, etc
 - Subscribe to websocket or mouse movements + transform stream
 - Simple example:
 ```
@@ -106,7 +108,7 @@ testSubject.next(3); //6
 
 ## Dependency Injection
 - Easy mocking, clean separation between modules
-- Solves the banana/gorilla/jungle problem with testing
+- Solves the banana/gorilla/jungle problem
 - In this example, the PersonService is injected:
 
 ```
@@ -121,11 +123,10 @@ export class personListComponent {
   }
 }
 ```
-- Inject the real PersonService, or a mocked version. Component doesn't know the difference
-- When testing the component, mock the PersonService and inject the mock
-- The component doesn't know the difference
-- Frequently used with http services
-- You can use Angular's DI in React too (see http://blog.mgechev.com/ for a post on it)
+- When testing, mock PersonService + inject mock
+- Real vs mock? Component doesn't know the difference
+- Common use: http services in unit tests
+- Can use Angular's DI in React too: http://blog.mgechev.com/2017/01/30/implementing-dependency-injection-react-angular-element-injectors/
 
 ## Mobile
 - Two options for mobile apps: Ionic and NativeScript
