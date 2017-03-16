@@ -17,11 +17,12 @@ ng serve
 - ng generate: scaffolding for components, pipes, services, etc
 - what else: `ng build` (webpack), `ng test` (jasmine/karma), `ng e2e` (protractor), `ng lint`, `ng build`, `ng eject`
 
-## What's included
-- Routing, dependency injection, TypeScript, server-side rendering
+## What's Included
+- Everything you need for typical web app
+- Templates, Routing, HTTP, Dependency Injection, TypeScript
 - Official style guide (John Papa).
-- Opinionated. Easy to jump into a project
-- But, you can mix and match if you like
+- Opinionated. Easy to jump into a new project
+- Can still mix and match (rendering, routing, etc)
 
 ## Components
 - Instead of MVC, encapsulate everything inside small, simple components
@@ -82,6 +83,7 @@ export class childComponent {
 </ul>
 ```
 - It's HTML with enhancements: `*` changes UI, `()` inputs, `[]` outputs, `([])` for two-way bindings, and `{{}}` for data bindings.
+- Familiar to most devs and designers
 
 ## Change detection and DOM updates
 - How does it work? Angular maintains a directed tree of components and their relationships. Stable, fast, predictable.
@@ -95,7 +97,7 @@ export class childComponent {
 - Use with onPush change detection for increased speed
 - Can also use Redux (or any other store you prefer)
 
-## Types
+## Types with TypeScript
 - TypeScript: compiler which adds strong typing to JS (you get ES6 too). `.ts -> .js`
 - You can start with an existing codebase and gradually add types. It looks like:
 
@@ -112,17 +114,39 @@ interface Bird {
   name: string;
   speed: number;
 }
+```
 
-let myBird: Bird = {
-  name: 'pigeon',
-  speed: 'fast' // Error
+- Improve function legibility and error checking:
+```
+function addAmountToEachItem(amount: number, items: number[]): number[] {
+  return items.map(i => i + amount);
 }
 ```
 
-- VS Code or atom-typescript provide great linting, jump to definition, autofill features
+- VS Code or atom-typescript provide great linting, jump to definition, autofill, peek features
+
+## Observables
+- Moving beyond promises to handle streams of data
+- Provides a rich set of FP tools like Underscore, but for streams of data
+- Angular's router and HTTP services use them
+- Many operators available: map, filter, merge, scan, etc
+- Subscribe to websocket or mouse movements + transform stream
+- Simple example:
+```
+const testSubject = new Rx.Subject();
+const basicScan = testSubject
+  .startWith(0)
+  .scan((acc, curr) => acc + curr);
+const subscribe = basicScan.subscribe(val => console.log('Accumulated total:', val));
+testSubject.next(1); //1
+testSubject.next(2); //3
+testSubject.next(3); //6
+```
+(Source: https://gist.github.com/btroncone/d6cf141d6f2c00dc6b35)
 
 ## Testing
 - Dependency Injection (easy mocking, clean separation between modules).
+- Solves the banana/gorilla/jungle problem with testing
 - In this example, the PersonService is injected:
 
 ```
@@ -132,11 +156,21 @@ export class personListComponent {
     this.people = peopleService.getHeroes();
   }
 }
+
+- Inject the real PersonService, or a mocked version. Component doesn't know the difference
 ```
 
 - When testing the component, mock the PersonService and inject the mock
 - Frequently used with http services
 -  You can use Angular's DI in React too (see http://blog.mgechev.com/ for a post on it)
+
+## Mobile
+- Two options for mobile apps: Ionic and NativeScript
+- Both have cli tools -- easy to get started
+- Ionic: mobile apps with Angular and Cordova (Ionic 2 uses Angular 2)
+- Ionic interface components = HTML/CSS/JS
+- NativeScript: Angular 2 native apps with native interfaces
+- NativeScript is fast, but there's more to maintain
 
 ## Trends
 - Small, tightly-scoped components with no side effects
