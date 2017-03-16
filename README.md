@@ -87,7 +87,7 @@ export class childComponent {
 
 ## Change detection and DOM updates
 - How does it work? Angular maintains a directed tree of components and their relationships. Stable, fast, predictable.
-- By default, Angular check all components in the tree with each event.
+- By default, Angular checks all components in the tree with each event.
 - With immutables, Angular can check only subtrees where an input has changed (onPush). Even faster
 
 ## Data store
@@ -150,10 +150,14 @@ testSubject.next(3); //6
 - In this example, the PersonService is injected:
 
 ```
+@Component({
+  selector: 'person-list',
+  providers: [PersonService]
+})
 export class personListComponent {
   people: Person[];
   constructor(personService: PersonService) {
-    this.people = peopleService.getHeroes();
+    this.people = peopleService.getPeople();
   }
 }
 
@@ -161,8 +165,9 @@ export class personListComponent {
 ```
 
 - When testing the component, mock the PersonService and inject the mock
+- The component doesn't know the difference
 - Frequently used with http services
--  You can use Angular's DI in React too (see http://blog.mgechev.com/ for a post on it)
+- You can use Angular's DI in React too (see http://blog.mgechev.com/ for a post on it)
 
 ## Mobile
 - Two options for mobile apps: Ionic and NativeScript
